@@ -22,7 +22,7 @@
 
 
 	if ($nota >= 7 && $frequencia >= 8) {
-			echo "O aluno {$nome}, esta aprovado" . PHP_EOL;
+				
 		}	else if (($nota >= 5 || $nota < 7) && ($frequencia >= 8)) {
 				echo "O aluno {$nome} esta de recuperacao." . PHP_EOL;
 		} else{
