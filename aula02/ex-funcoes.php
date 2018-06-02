@@ -22,6 +22,10 @@ function verificaMaior(int $num1, int $num2) : int
 {
 	return ($num1 > $num2) ? $num1 : $num2;
 }
+
+
+
+
 echo '-- PAR - IMPAR --'.PHP_EOL;
 $num = readline('Digite o numero: ');
 echo parImpar($num) . PHP_EOL;
