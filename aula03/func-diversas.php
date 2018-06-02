@@ -95,6 +95,10 @@
 	echo strip_tags('<hr>');
 
 	//nl2br converte uma quebra de linha console para um <br> ou quebra de linha do navegador
-	
+
+
+	//die() ou exit() interrompe a execucao do script
+
+	//sleep gera uma pausa no codigo  sleep(4)
 
  ?>
