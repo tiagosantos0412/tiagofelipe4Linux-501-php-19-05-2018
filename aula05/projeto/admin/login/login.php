@@ -22,9 +22,26 @@
 	<input type="password" name="pass" class="form-control form-control-sm">
 	</div>
 	<div class="form-group" style="margin-top: 5px;">
-		<a href="./../../" class="btn btn-sm btn-warning">Go Back</a>
+		<a href="./../../" class="btn btn-sm btn-primary">Go Back</a>
 		<input type="submit" class="btn btn-sm btn-success" value="Login">
 	</div>
 </form>
 
 <?php require_once '../../layout/footer.php'; ?>
+
+<?php require_once dirname(dirname(__DIR__)).'/include/data/login/db-login.php'; ?>
+
+<?php 
+
+	if(!empty($_POST)){
+		$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+		$pass = filter_input(INPUT_POST, 'pass');
+
+		if(verifyLogin($email, $pass)){
+			header('location:/'.BASEDIR.'admin');
+		} else {
+			header('Location:/'.BASEDIR.'admin/login/login.php');
+		}
+	}
+
+?>

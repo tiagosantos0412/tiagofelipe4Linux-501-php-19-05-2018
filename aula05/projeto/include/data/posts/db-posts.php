@@ -1,54 +1,62 @@
 <?php 
 
-	require_once dirname(__DIR__).'/db/connection.php';
+//db-posts.php
 
-	function insertPost(array $post){
-		$con = connect();
+require_once dirname(__DIR__).'/db/connection.php';
 
-		$query = "INSERT INTO posts(
-		titulo, conteudo, criado_em, publicado, usuario_id
-		) VALUES (
-		'{$post['titulo']}',
-		'{$post['conteudo']}',
-		'{$post['criado_em']}',
-		'{$post['publicado']}',
-		'{$post['usuario_id']}')
-		";
+function insertPost(array $post)
+{
+	$con = connect();
+	$query = "INSERT INTO posts (titulo,conteudo,criado_em,publicado,usuario_id) VALUES ('{$post['titulo']}','{$post['conteudo']}','{$post['criado_em']}','{$post['publicado']}','{$post['usuario_id']}')";
+	$result = pg_query($con,$query);
+	disconnect($con);
+	return $result;
+}
 
-		$result = pg_query($con,$query);		
-		disconnect($con);
-		return $result;
-	}
+function updatePost(array $post)
+{
+	$con = connect();
+	$query = "UPDATE posts SET titulo='{$post['titulo']}',conteudo='{$post['conteudo']}',publicado='{$post['publicado']}' WHERE id={$post['id']}";
+	$result = pg_query($con,$query);
+	disconnect($con);
+	return $result;
+}
 
-	function updatePost(){}
+function deletePost(int $id)
+{
+	$con = connect();
+	$query = "DELETE FROM posts WHERE id={$id}";
+	$result = pg_query($con,$query);
+	disconnect($con);
+	return $result;
+}
 
-	function deletePost(){}
+function findByIdPost(int $id, int $userId)
+{
+	$con = connect();
+	$query = "SELECT * FROM posts WHERE id={$id} AND usuario_id = {$userId}";
+	$result = pg_query($con,$query);
+	$post =  pg_fetch_assoc($result);
+	disconnect($con);
+	return $post;
+}
 
-	function findByIdPost(int $id){
+function findAllPostPublished()
+{
+	$con = connect();
+	$query = "SELECT * FROM posts WHERE publicado = true";
+	$result = pg_query($con,$query);
+	$posts =  pg_fetch_all($result);
+	disconnect($con);
+	return $posts;
+}
 
-		$con = connect();
-		$query = "SELECT * FROM posts WHERE id={$id}";
-		$result = pg_query($con,$query);
-		$post = pg_fetch_assoc($result);
-		disconnect($con);
-		return$post;
-	}
-
-	function findAllPost(){
-		$con = connect();
-		$query = "SELECT * FROM posts";
-		$result = pg_query($con,$query);
-		$posts = pg_fetch_all($result);
-		disconnect($con);
-		return $posts;
-	}
-
-	$post = ['titulo'    => 'Titulo do post', 
-			'conteudo'   => 'Conteudo do post', 
-			'criado_em'  => date('Y-m-d H:i:s', time()), 
-			'publicado'  => 'f', 
-			'usuario_id' => 5];
-
-	insertPost($post);
-
- ?>
+function findAllPostByUser(int $userId)
+{
+	$con = connect();
+	$query = "SELECT * FROM posts WHERE usuario_id = {$userId} ORDER BY id";
+	$result = pg_query($con,$query);
+	$posts =  pg_fetch_all($result);
+	disconnect($con);
+	return $posts;
+}

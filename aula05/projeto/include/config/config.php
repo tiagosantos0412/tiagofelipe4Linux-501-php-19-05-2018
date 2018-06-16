@@ -8,6 +8,6 @@
 	const PASS = '123';
 	const DB   = 'aula';
 
-	const BASEDIR = '/var/www/html/500/aula05/projeto';
+	const BASEDIR = '500/aula05/projeto/';
 
  ?>
