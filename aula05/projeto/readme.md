@@ -3,14 +3,21 @@
 ## Blog
 
 ##Estrutura de pastas
-├── aula05
-│   └── projeto
-│       ├── admin
-│       │   ├── layout
-│       │   ├── login
-│       │   └── posts
-│       ├── include
-│       │   ├── config
-│       │   └── data
-│       ├── layout
-│       └── readme.md
+├── admin
+│   ├── layout
+│   ├── login
+│   │   └── login.php
+│   └── posts
+├── include
+│   ├── config
+│   │   └── config.php
+│   └── data
+│       ├── db
+│       │   └── connection.php
+│       └── posts
+│           └── db-posts.php
+├── index.php
+├── layout
+│   ├── footer.php
+│   └── header.php
+└── readme.md
